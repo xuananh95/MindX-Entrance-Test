@@ -64,6 +64,7 @@
         <div id="copied">Copied!</div>
     </div>
     <script>
+        // Function to randomly generate a color
         function random_color(){
             let arr = "0123456789ABCDEF";
             let color_code = "#";
@@ -74,6 +75,7 @@
             input.value = color_code;
             document.body.style.backgroundColor = color_code;
         }
+        // Event listener to handle the color-picker form submit action
         document.getElementById("color_form").addEventListener("submit", function(event){
             event.preventDefault();
             color_picker = document.getElementById('color-picker');
@@ -81,6 +83,7 @@
             input.value = color_picker.value;
             document.body.style.backgroundColor = color_picker.value;
         });
+        // Function to copy the color code to clipboard
         function copy(){
             input = document.getElementById("color-code");
             navigator.clipboard.writeText(input.value);
