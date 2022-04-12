@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Color picker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Beau+Rivage&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Beau Rivage', cursive;
+        }
+        h1 {
+            font-size: 50px;
+        }
+        .container {
+            margin: auto;
+            margin-top: 10%;
+            width: 30%;
+            border: 3px solid grey;
+            padding: 20px;
+            text-align: center;
+        }
+        button, input[type=submit] {
+            border-radius: 15px;
+            font-size: 25px;
+        }
+        #color-code{
+            display: block; 
+            margin:auto; 
+            width: 50%;  
+            font-size: 25px; 
+            text-align: center; 
+            margin-top: 15px;
+        }
+        label {
+            font-size: 30px; 
+            margin-right: 25px; 
+            display: block;
+        }
+        #copied {
+            visibility: hidden; 
+            background-color: yellow;
+            color: red;
+            width: 20%; 
+            margin: auto; 
+            font-size: 25px
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Color Picker</h1>
+        <button style="display: block; margin: auto; width: 60%; margin-bottom: 15px;" onclick="random_color()">Get a random color</button>
+        <form id="color_form">
+            <label for="color-picker">Or pick your favorite color!</label>
+            <input name="color-picker" id="color-picker" type="color" style>
+            <input style="font-size: 25px;" type="submit" value="Submit">
+        </form>
+        <input type="text" id="color-code" disabled>
+        <button style="margin-top: 15px;" onclick="copy()">Copy Hex Code</button>
+        <div id="copied">Copied!</div>
+    </div>
+    <script>
+        function random_color(){
+            let arr = "0123456789ABCDEF";
+            let color_code = "#";
+            for (let i = 0; i < 6; i++){
+                color_code += arr[Math.floor(Math.random() * 16)];
+            }
+            input = document.getElementById("color-code");
+            input.value = color_code;
+            document.body.style.backgroundColor = color_code;
+        }
+        document.getElementById("color_form").addEventListener("submit", function(event){
+            event.preventDefault();
+            color_picker = document.getElementById('color-picker');
+            input = document.getElementById('color-code');
+            input.value = color_picker.value;
+            document.body.style.backgroundColor = color_picker.value;
+        });
+        function copy(){
+            input = document.getElementById("color-code");
+            navigator.clipboard.writeText(input.value);
+            copied = document.getElementById("copied");
+            copied.style.visibility = "visible";
+            setTimeout(() => {
+                copied.style.visibility = "hidden";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
